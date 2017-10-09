@@ -78,8 +78,8 @@ public class ChatFragment extends Fragment {
 
 
 //TODO
-//     check library versions
-//    remove functionality
+//check library versions
+//remove functionality
 
 
 
