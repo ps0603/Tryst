@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .build();
 
 
-        ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
+        ViewPager vpPager = findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 
@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
 
-    public static class MyPagerAdapter extends FragmentPagerAdapter {
-        public MyPagerAdapter(FragmentManager fragmentManager) {
+    private static class MyPagerAdapter extends FragmentPagerAdapter {
+        private MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
 
         }

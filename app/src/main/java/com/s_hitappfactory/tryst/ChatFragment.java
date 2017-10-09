@@ -34,7 +34,7 @@ import android.support.v4.content.ContextCompat;
 
 public class ChatFragment extends Fragment {
 
-    public static final String MESSAGES_CHILD = "messages";
+    //public static final String MESSAGES_CHILD = "messages";
     //private static final int REQUEST_INVITE = 1;
     //private static final int REQUEST_IMAGE = 2;
     //private static final String LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif";
@@ -64,9 +64,9 @@ public class ChatFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
 
         // Initialize ProgressBar and RecyclerView.
-        mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        mProgressBar = view.findViewById(R.id.progressBar);
 
-        mMessageRecyclerView = (RecyclerView) view.findViewById(R.id.messageRecyclerView);
+        mMessageRecyclerView =  view.findViewById(R.id.messageRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         mLinearLayoutManager.setStackFromEnd(true);
         //mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
@@ -90,7 +90,7 @@ public class ChatFragment extends Fragment {
                 tMessage.class,
                 R.layout.item_message,
                 MessageViewHolder.class,
-                mFirebaseDatabaseReference.child(MESSAGES_CHILD)) {
+                mFirebaseDatabaseReference.child("messages")) {
 
             @Override
             protected void populateViewHolder(final MessageViewHolder viewHolder,tMessage tmessage, int position) {
@@ -169,7 +169,7 @@ public class ChatFragment extends Fragment {
 
 
 
-        mMessageEditText = (EditText) view.findViewById(R.id.messageEditText);
+        mMessageEditText = view.findViewById(R.id.messageEditText);
         mMessageEditText.setFilters(
                 new InputFilter[]{
                         new InputFilter.LengthFilter(200)
@@ -194,7 +194,7 @@ public class ChatFragment extends Fragment {
             }
         });
 
-        mSendButton = (Button) view.findViewById(R.id.sendButton);
+        mSendButton = view.findViewById(R.id.sendButton);
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -202,7 +202,7 @@ public class ChatFragment extends Fragment {
             }
         });
 
-        mAddMessageImageView = (ImageView) view.findViewById(R.id.addMessageImageView);
+        mAddMessageImageView = view.findViewById(R.id.addMessageImageView);
         mAddMessageImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -236,7 +236,7 @@ public class ChatFragment extends Fragment {
     }
 
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder {
+    private static class MessageViewHolder extends RecyclerView.ViewHolder {
         TextView messageTextView;
         ImageView messageImageView;
         TextView messengerTextView;
@@ -244,10 +244,10 @@ public class ChatFragment extends Fragment {
 
         public MessageViewHolder(View v) {
             super(v);
-            messageTextView = (TextView) itemView.findViewById(R.id.messageTextView);
-            messageImageView = (ImageView) itemView.findViewById(R.id.messageImageView);
-            messengerTextView = (TextView) itemView.findViewById(R.id.messengerTextView);
-            messengerImageView = (CircleImageView) itemView.findViewById(R.id.messengerImageView);
+            messageTextView = itemView.findViewById(R.id.messageTextView);
+            messageImageView = itemView.findViewById(R.id.messageImageView);
+            messengerTextView = itemView.findViewById(R.id.messengerTextView);
+            messengerImageView = itemView.findViewById(R.id.messengerImageView);
         }
     }
 
