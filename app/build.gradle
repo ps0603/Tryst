@@ -5,13 +5,13 @@ android {
         release {
             keyAlias 'releasekey'
             keyPassword 'paromita'
-            storeFile file('C:/Users/PPP/Desktop/release.jks')
+            storeFile rootProject.file('release.jks')
             storePassword 'paromita'
         }
         debug {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
-            storeFile file('C:/Users/PPP/Desktop/GitPulls/Tryst/debug.keystore')
+            storeFile rootProject.file('debug.keystore')
             storePassword 'android'
         }
     }
