@@ -49,7 +49,7 @@ public class ChatFragment extends Fragment {
     private String mPhotoUrl;
 
     private Button mSendButton;
-    private RecyclerView mMessageRecyclerView;
+    public RecyclerView mMessageRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private ProgressBar mProgressBar;
     private EditText mMessageEditText;
@@ -57,7 +57,6 @@ public class ChatFragment extends Fragment {
 
     private DatabaseReference mFirebaseDatabaseReference;
     private FirebaseRecyclerAdapter<TrystMessage, MessageViewHolder> mFirebaseAdapter;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,8 +75,7 @@ public class ChatFragment extends Fragment {
         mMessageRecyclerView =  view.findViewById(R.id.messageRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         mLinearLayoutManager.setStackFromEnd(true);
-        //mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
-
+        mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         // reading all old messages*******************************************************
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -143,18 +141,15 @@ public class ChatFragment extends Fragment {
                 // If the recycler view is initially being loaded or the
                 // user is at the bottom of the list, scroll to the bottom
                 // of the list to show the newly added message.
-                if (lastVisiblePosition == -1 ||
-                        (positionStart >= (messageCount - 1) &&
-                                lastVisiblePosition == (positionStart - 1))) {
+                if (lastVisiblePosition == -1 || (positionStart >= (messageCount - 1) && lastVisiblePosition == (positionStart - 1))) {
                     mMessageRecyclerView.scrollToPosition(positionStart);
                 }
             }
         });
 
-        mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
+        //mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
         mMessageRecyclerView.setAdapter(mFirebaseAdapter);
         // reading all old messages*******************************************************
-
 
         mMessageEditText = view.findViewById(R.id.messageEditText);
         mMessageEditText.setFilters(
@@ -181,7 +176,6 @@ public class ChatFragment extends Fragment {
             }
         });
 
-
         //sending text to firebase**********************************************
         mSendButton = view.findViewById(R.id.sendButton);
         mSendButton.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +185,7 @@ public class ChatFragment extends Fragment {
                 TrystMessage trystMessage = new TrystMessage(mMessageEditText.getText().toString(),
                         mUsername,
                         mPhotoUrl,
-                        null /* no image */);
+                        null);
                 mFirebaseDatabaseReference.child(MESSAGES_CHILD).push().setValue(trystMessage);
                 mMessageEditText.setText("");
             }
@@ -293,7 +287,7 @@ public class ChatFragment extends Fragment {
     }
 
 
-    private static class MessageViewHolder extends RecyclerView.ViewHolder {
+    public static class MessageViewHolder extends RecyclerView.ViewHolder {
         TextView messageTextView;
         ImageView messageImageView;
         TextView messengerTextView;
